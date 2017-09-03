@@ -27,13 +27,11 @@ class Board {
   }
 
   lines() {
-    return this.boardState()
-      .concat(this.diagonals())
-      .concat(this.columns());
+    return this.boardState.concat(this.diagonals()).concat(this.columns());
   }
 
   winningLine(line) {
-    if (line[0] !== undefined && line[0] === line[1] && line[1] === line[2]) {
+    if (line[0] && line[0] === line[1] && line[0] === line[2]) {
       return line[0];
     } else {
       return false;
@@ -50,13 +48,14 @@ class Board {
   }
 
   winningBoard() {
-    this.lines().forEach(function(line) {
+    let result = false;
+    this.lines().forEach(line => {
       if (this.winningLine(line)) {
-        return this.winningLine(line);
+        result = this.winningLine(line);
       }
     });
-    return false;
+    return result;
   }
 }
 
-module.exports(Board);
+module.exports = Board;
