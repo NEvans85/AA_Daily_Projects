@@ -40,10 +40,19 @@ class Board {
     }
   }
 
+  placeMark(mark, pos) {
+    if (this.boardState[pos[0]][pos[1]]) {
+      return false;
+    } else {
+      this.boardState[pos[0]][pos[1]] = mark;
+      return true;
+    }
+  }
+
   winningBoard() {
-    lines().forEach(function(line) {
-      if (winningLine(line)) {
-        return winningLine(line);
+    this.lines().forEach(function(line) {
+      if (this.winningLine(line)) {
+        return this.winningLine(line);
       }
     });
     return false;
