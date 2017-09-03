@@ -10,13 +10,13 @@ class Board {
   }
 
   columns() {
-    const result = [[], [], []];
+    const columns = [[], [], []];
     for (var i = 0; i < this.boardState.length; i++) {
       for (var j = 0; j < this.boardState[i].length; j++) {
-        result[j].push(this.boardState[i][j]);
+        columns[j].push(this.boardState[i][j]);
       }
     }
-    return result;
+    return columns;
   }
 
   diagonals() {
@@ -26,8 +26,27 @@ class Board {
     ];
   }
 
-  rows() {
-    this.boardState;
+  lines() {
+    return this.boardState()
+      .concat(this.diagonals())
+      .concat(this.columns());
+  }
+
+  winningLine(line) {
+    if (line[0] !== undefined && line[0] === line[1] && line[1] === line[2]) {
+      return line[0];
+    } else {
+      return false;
+    }
+  }
+
+  winningBoard() {
+    lines().forEach(function(line) {
+      if (winningLine(line)) {
+        return winningLine(line);
+      }
+    });
+    return false;
   }
 }
 
